@@ -6,13 +6,14 @@ int main() {
     docFile(&head); // Tu dong tai du lieu khi khoi dong 
     do {
         printf("\n--- QUAN LY VE XE KHACH ---");
-        printf("\n1. Them ve");
-        printf("\n2. Hien thi danh sach");
+        printf("\n1. Them ve xe");
+        printf("\n2. Hien thi danh sach ve");
         printf("\n3. Xoa ve");
-        printf("\n4. Thong ke (De quy)");
+        printf("\n4. Thong ke ");
         printf("\n0. Luu va Thoat");
         printf("\nChon: ");
         scanf("%d", &chon);
+        //chon menu bang switch case
         switch(chon) {
             case 1: themVe(&head); break;
             case 2: hienThi(head); break;
