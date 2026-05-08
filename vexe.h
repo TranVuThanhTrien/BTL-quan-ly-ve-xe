@@ -33,5 +33,7 @@ void docFile(VeXe **head);
 void giaiPhong(VeXe *head);
 int demVeDeQuy(VeXe *head);
 int validatePrice(const char *input);
+int validateDate(const char *date);
+VeXe* searchByNameRecursive(VeXe *head, const char *name);
 
 #endif
