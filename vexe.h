@@ -68,5 +68,11 @@ void luuFile(VeXe *head);
 void docFile(VeXe **head);
 void giaiPhong(VeXe *head);
 int demVeDeQuy(VeXe *head); // Ham de quy
+// utils.c prototypes
+int validatePrice(const char *input);
+int validateDate(const char *date);
+int countTicketsRecursive(Ticket *head);
+Ticket* searchByNameRecursive(Ticket *head, const char *name);
+void freeAllTickets(Ticket *head);
 
 #endif
