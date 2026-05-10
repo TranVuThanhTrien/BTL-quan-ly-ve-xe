@@ -1,47 +1,40 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "vexe.h" 
 
-typedef struct {
-    int id;
-    char hoTen[50];
-    char soGhe[10];
-    float giaVe;
-} VeXe;
-
-void luuVe(VeXe v) {
-    FILE *f = fopen("vexe.txt", "a");
-    if (f == NULL) return;
-    fprintf(f, "%d|%s|%s|%.2f\n", v.id, v.hoTen, v.soGhe, v.giaVe);
-    fclose(f);
-}
-
-int checkTest(int idTim) {
-    FILE *f = fopen("vexe.txt", "r");
-    if (f == NULL) return 0;
-
-    VeXe v;
-    while (fscanf(f, "%d|%[^|]|%[^|]|%f\n", &v.id, v.hoTen, v.soGhe, &v.giaVe) != EOF) {
-        if (v.id == idTim) {
-            fclose(f);
-            return 1;
+int validatePrice(const char *input) {
+    for (int i = 0; input[i] != '\0'; i++) {
+        if (!isdigit(input[i])) {
+            return 0; 
         }
     }
-    fclose(f);
-    return 0;
+    return 1;
 }
 
-int main() {
-    VeXe v1 = {101, "Nguyen Van A", "A12", 50000};
-    
-    printf("Processing: %d\n", v1.id);
-    luuVe(v1);
+int validateDate(const char *date) {
+    int d, m, y;
+    if (sscanf(date, "%d/%d/%d", &d, &m, &y) != 3) return 0;
+    if (d < 1 || d > 31 || m < 1 || m > 12 || y < 1900) return 0;
+    return 1;
+}
 
-    if (checkTest(101)) {
-        printf("Test result: PASS\n");
-    } else {
-        printf("Test result: FAIL\n");
+// Sten ham thanh demVeDeQuy
+int demVeDeQuy(VeXe *head) {
+    if (head == NULL) return 0;
+    return 1 + demVeDeQuy(head->next);
+}
+
+// customerName thanh tenKhach
+VeXe* searchByNameRecursive(VeXe *head, const char *name) {
+    if (head == NULL) return NULL;
+    if (strcmp(head->tenKhach, name) == 0) return head;
+    return searchByNameRecursive(head->next, name);
+}
+
+//  Ticket thanh VeXe
+void giaiPhong(VeXe *head) {
+    VeXe *temp;
+    while (head != NULL) {
+        temp = head;
+        head = head->next;
+        free(temp);
     }
-
-    return 0;
-}
+    printf(">> Bo Nho Da Duoc Giai Phong \n");
