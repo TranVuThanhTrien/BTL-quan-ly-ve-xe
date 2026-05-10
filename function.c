@@ -4,13 +4,13 @@ void xoaDem() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
-// Cap phát bo nho dong
+// Cap phat bo nho dong
 VeXe* taoNode() {
     VeXe *newNode = (VeXe*)malloc(sizeof(VeXe));
     if (newNode == NULL) return NULL;
     
     printf("Nhap ma ve: "); scanf("%s", newNode->maVe);
-    xoadem(); // Xoa bo nho dem
+    xoaDem(); // SUA: xoadem() thanh xoaDem()
     printf("Nhap ten khach hang: "); fgets(newNode->tenKhach, MAX, stdin);
     newNode->tenKhach[strcspn(newNode->tenKhach, "\n")] = 0;
     printf("Nhap tuyen duong: "); fgets(newNode->tuyenDuong, MAX, stdin);
@@ -27,10 +27,11 @@ void themVe(VeXe **head) {
         *head = newV;
     } else {
         VeXe *temp = *head;
-        while (temp->next != NULL)
-        temp = temp->next;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newV; // SUA: dua dong nay vao trong khoi else
     }
-        temp->next = newV;
 }
 //Xoa ve theo ma ve
 void xoaVe(VeXe **head, char *ma) {
@@ -46,10 +47,11 @@ void xoaVe(VeXe **head, char *ma) {
 }
 //Hien thi danh sach ve
 void hienThi(VeXe *head) {
-    Vexe *temp = head // dung bien tam
+    VeXe *temp = head; // SUA: Vexe thanh VeXe, them dau ;
     printf("\n%-10s %-20s %-20s %-10s\n", "Ma Ve", "Ten Khach", "Tuyen Duong", "Gia");
     while (temp != NULL) {
-        printf("%-10s %-20s %-20s %-10.2f\n", temp->maVe, temp->tenKhach, temp->tuyenDuong, head->giaVe);
+        // SUA: head->giaVe thanh temp->giaVe
+        printf("%-10s %-20s %-20s %-10.2f\n", temp->maVe, temp->tenKhach, temp->tuyenDuong, temp->giaVe);
         temp = temp->next;
     }
 }
