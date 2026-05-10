@@ -54,4 +54,5 @@ void hienThi(VeXe *head) {
         printf("%-10s %-20s %-20s %-10.2f\n", temp->maVe, temp->tenKhach, temp->tuyenDuong, temp->giaVe);
         temp = temp->next;
     }
+
 }
