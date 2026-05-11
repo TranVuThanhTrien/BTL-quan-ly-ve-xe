@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "vexe.h" 
+
 int validatePrice(const char *input) {
     for (int i = 0; input[i] != '\0'; i++) {
         if (!isdigit(input[i])) {
@@ -11,7 +12,6 @@ int validatePrice(const char *input) {
     }
     return 1;
 }
-
 int validateDate(const char *date) {
     int d, m, y;
     if (sscanf(date, "%d/%d/%d", &d, &m, &y) != 3) return 0;
@@ -19,19 +19,19 @@ int validateDate(const char *date) {
     return 1;
 }
 
-int countTicketsRecursive(Ticket *head) {
+int demVeDeQuy(VeXe *head) {
     if (head == NULL) return 0;
-    return 1 + countTicketsRecursive(head->next);
+    return 1 + demVeDeQuy(head->next);
 }
 
-Ticket* searchByNameRecursive(Ticket *head, const char *name) {
+VeXe* timTheoTenDeQuy(VeXe *head, const char *ten) {
     if (head == NULL) return NULL;
-    if (strcmp(head->customerName, name) == 0) return head;
-    return searchByNameRecursive(head->next, name);
+    if (strcmp(head->tenKhach, ten) == 0) return head;
+    return timTheoTenDeQuy(head->next, ten);
 }
 
-void freeAllTickets(Ticket *head) {
-    Ticket *temp;
+void giaiPhong(VeXe *head) {
+    VeXe *temp;
     while (head != NULL) {
         temp = head;
         head = head->next;
@@ -39,4 +39,3 @@ void freeAllTickets(Ticket *head) {
     }
     printf(">> Bo Nho Da Duoc Giai Phong \n");
 }
-
