@@ -1,40 +1,48 @@
-#include "vexe.h" 
+#include "vexe.h"
 
-int validatePrice(const char *input) {
-    for (int i = 0; input[i] != '\0'; i++) {
-        if (!isdigit(input[i])) {
-            return 0; 
+void luuFile(VeXe *head) {
+    FILE *f = fopen(FILE_BIN, "wb"); 
+    if (f == NULL) {
+        printf("Loi: Khong the mo file de luu du lieu!\n");
+        return;
+    }
+    
+    VeXe *temp = head;
+    while (temp != NULL) {
+        fwrite(temp, sizeof(VeXe), 1, f);
+        temp = temp->next;
+    }
+    
+    fclose(f);
+    printf(">> Da luu du lieu thanh cong vao %s\n", FILE_BIN);
+}
+
+void docFile(VeXe **head) {
+    FILE *f = fopen(FILE_BIN, "rb"); 
+    if (f == NULL) {
+        printf(">> Khong tim thay file %s. Se tao file moi khi luu.\n", FILE_BIN);
+        return;
+    }
+    
+    VeXe temp;
+    while (fread(&temp, sizeof(VeXe), 1, f) == 1) {
+        VeXe *newNode = (VeXe*)malloc(sizeof(VeXe));
+        if (newNode != NULL) {
+            *newNode = temp;       
+            newNode->next = NULL;  
+            
+            if (*head == NULL) {
+                *head = newNode;
+            } else {
+                VeXe *curr = *head;
+                while (curr->next != NULL) {
+                    curr = curr->next;
+                }
+                curr->next = newNode;
+            }
         }
     }
-    return 1;
+    
+    fclose(f);
+    printf(">> Da tai du lieu tu %s thanh cong.\n", FILE_BIN);
 }
-
-int validateDate(const char *date) {
-    int d, m, y;
-    if (sscanf(date, "%d/%d/%d", &d, &m, &y) != 3) return 0;
-    if (d < 1 || d > 31 || m < 1 || m > 12 || y < 1900) return 0;
-    return 1;
-}
-
-// Sten ham thanh demVeDeQuy
-int demVeDeQuy(VeXe *head) {
-    if (head == NULL) return 0;
-    return 1 + demVeDeQuy(head->next);
-}
-
-// customerName thanh tenKhach
-VeXe* searchByNameRecursive(VeXe *head, const char *name) {
-    if (head == NULL) return NULL;
-    if (strcmp(head->tenKhach, name) == 0) return head;
-    return searchByNameRecursive(head->next, name);
-}
-
-//  Ticket thanh VeXe
-void giaiPhong(VeXe *head) {
-    VeXe *temp;
-    while (head != NULL) {
-        temp = head;
-        head = head->next;
-        free(temp);
-    }
-    printf(">> Bo Nho Da Duoc Giai Phong \n");
