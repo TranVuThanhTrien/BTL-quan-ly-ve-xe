@@ -14,13 +14,14 @@ typedef struct VeXe {
     char maVe[10];
     char tenKhach[MAX];
     char tuyenDuong[MAX];
+    int soGhe; // GHE NGOI DA DUOC THEM VAO
     float giaVe;
     struct VeXe *next; 
 } VeXe;
 
 // Khai bao cac ham trong function.c
 void xoaDem();
-VeXe* taoNode();
+VeXe* taoNode(VeXe *head); // Nhan them tham so head de kiem tra trung
 void themVe(VeXe **head);
 void hienThi(VeXe *head);
 void xoaVe(VeXe **head, char *ma);
@@ -35,5 +36,6 @@ int demVeDeQuy(VeXe *head);
 int validatePrice(const char *input);
 int validateDate(const char *date);
 VeXe* timTheoTenDeQuy(VeXe *head, const char *ten);
+int kiemTraGheTrong(VeXe *head, int soGheCanKiemTra); // Ham moi
 
 #endif
