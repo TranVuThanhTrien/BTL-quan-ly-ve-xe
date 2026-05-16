@@ -28,7 +28,7 @@ Dự án được chia thành 4 module độc lập, tương ứng với nhiệm
 ---
 
 ## ✨ 3. Các tính năng nổi bật
-- [x] **Quản lý vé:** Thêm, xóa và hiển thị vé xe với định dạng bảng ngay ngắn.
+- [x] **Quản lý vé:** Thêm, xóa và hiển thị vé xe (bao gồm cả ngày khởi hành) với định dạng bảng biểu ngay ngắn. Tích hợp thuật toán validate ngày tháng hợp lệ.
 - [x] **Quản lý chỗ ngồi:** Cho phép chọn số ghế (1-50) và có thuật toán tự động bắt lỗi, từ chối cấp vé nếu ghế đã có người đặt.
 - [x] **Thuật toán Đệ quy:** Áp dụng đệ quy để thống kê tổng số lượng vé (`demVeDeQuy`) và tìm kiếm (`timTheoTenDeQuy`).
 - [x] **Lưu trữ tự động:** Không lo mất dữ liệu. Tự động lưu vào `data_vexe.dat` khi thoát và nạp lại khi mở phần mềm.
