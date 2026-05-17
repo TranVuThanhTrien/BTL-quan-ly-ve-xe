@@ -17,6 +17,19 @@ VeXe* taoNode(VeXe *head) {
     newNode->tenKhach[strcspn(newNode->tenKhach, "\n")] = 0;
     printf("Nhap tuyen duong: "); fgets(newNode->tuyenDuong, MAX, stdin);
     newNode->tuyenDuong[strcspn(newNode->tuyenDuong, "\n")] = 0;
+
+    // XU LY NHAP NGAY THANG (Su dung ham validateDate co san)
+    int ngayHopLe = 0;
+    do {
+        printf("Nhap ngay di (dd/mm/yyyy): ");
+        scanf("%s", newNode->ngayDi);
+        
+        if (validateDate(newNode->ngayDi) == 1) {
+            ngayHopLe = 1; // Ngay hop le thi thoat vong lap
+        } else {
+            printf(">> LOI: Ngay thang khong hop le hoac sai dinh dang. Vui long nhap lai!\n");
+        }
+    } while (ngayHopLe == 0);
     
     // XU LY CHON GHE (Bat loi nhap sai hoac trung ghe)
     int gheHopLe = 0;
@@ -71,17 +84,21 @@ void xoaVe(VeXe **head, char *ma) {
     printf(">> Da xoa ve thanh cong!\n");
 }
 
-// Hien thi danh sach ve kem So Ghe
+// Hien thi danh sach ve kem Ngay Di va So Ghe
 void hienThi(VeXe *head) {
     if (head == NULL) {
         printf(">> Danh sach ve hien dang trong!\n");
         return;
     }
     VeXe *temp = head; 
-    printf("\n%-10s %-20s %-20s %-10s %-10s\n", "Ma Ve", "Ten Khach", "Tuyen Duong", "So Ghe", "Gia");
-    printf("-----------------------------------------------------------------------------\n");
+    
+    // Mo rong cot Ten Khach (25) va Tuyen Duong (30), them dau | de ke bang dep hon
+    printf("\n%-10s | %-25s | %-30s | %-12s | %-8s | %-15s\n", "Ma Ve", "Ten Khach", "Tuyen Duong", "Ngay Di", "So Ghe", "Gia (VND)");
+printf("---------------------------------------------------------------------------------------------------------------\n");
+    
     while (temp != NULL) {
-        printf("%-10s %-20s %-20s %-10d %-10.2f\n", temp->maVe, temp->tenKhach, temp->tuyenDuong, temp->soGhe, temp->giaVe);
+        printf("%-10s | %-25s | %-30s | %-12s | %-8d | %-15.2f\n", 
+               temp->maVe, temp->tenKhach, temp->tuyenDuong, temp->ngayDi, temp->soGhe, temp->giaVe);
         temp = temp->next;
     }
 }
